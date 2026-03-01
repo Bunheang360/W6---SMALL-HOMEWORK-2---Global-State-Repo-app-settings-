@@ -5,6 +5,7 @@ import '../../../data/repositories/songs/song_repository.dart';
 import '../../../model/songs/song.dart';
 import '../../states/player_state.dart';
 import '../../theme/theme.dart';
+import '../../states/settings_state.dart';
 
 class LibraryScreen extends StatelessWidget {
   const LibraryScreen({super.key});
@@ -14,12 +15,15 @@ class LibraryScreen extends StatelessWidget {
     // 1- Read the global song repository
     SongRepository songRepository = context.read<SongRepository>();
     List<Song> songs = songRepository.fetchSongs();
+
+    final settings = context.watch<AppSettingsState>();
+    final themeColor = settings.theme;
  
     // 3 - Watch the global player state
     PlayerState playerState = context.watch<PlayerState>();
 
     return Container(
-    
+      color: themeColor.backgroundColor,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
